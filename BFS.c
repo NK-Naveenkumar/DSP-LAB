@@ -1,0 +1,98 @@
+#include <stdio.h>
+#include <stdbool.h>
+#define N 6
+int Graphnum;
+int queue[N],path[N];
+int front = -1,rear=-1;
+void enqueue(int val){
+    if(front ==-1 ){
+        front = front +1;
+        rear = rear+1;
+        queue[rear] = val;
+        //printf("%d", queue[rear]);
+        return;
+    }
+    rear = rear+1;
+    queue[rear] = val;
+    //printf("%d",queue[rear]);
+    return;
+}
+int dequeue(){
+    int imd=queue[front];
+    front=front+1;
+    return imd;
+}
+int isempty(){
+    //printf("%d %d",front,rear);
+    if(front>rear) return 0;
+    else return 1;
+    
+}
+int search_Q(int key){
+    int i=front;
+    while(i<=rear){
+        if(queue[i]==key) return 0;
+        i++;
+    }
+    return 1;
+}
+int search_path(int key){
+    for(int i=0;i<5;i++) if(path[i]==key) return 0;
+    return 1;
+}
+void BFS(int graph[N][N],int k,int n){
+    enqueue(k);
+    int curr,m=0;
+   // printf("%d",m);
+    while(isempty()!=0){
+    curr=dequeue();
+    //printf("%d",curr);
+    path[m] = curr;
+    m++;
+    for(int i=0;i<n;i++){
+        if(graph[curr][i]==1 && search_Q(i)==1 && search_path(i)==1){
+            enqueue(i);
+        }
+    }
+    if(Graphnum==1) for(int i=0;i<m;i++) printf("%d ",path[i]);
+    if(Graphnum==2) for(int i=0;i<m;i++) printf("%d ",path[i]+1);
+    printf("\n");
+    }
+}
+
+int main()
+{   int select =3;
+    while(select!=0){
+        front = -1;
+        rear = -1;
+        for(int i=0;i<N;i++){
+            path[i] = 0;
+        }
+    printf("Enter your selection: graph1 or graph2 or 0 to exit: ");
+    scanf("%d",&Graphnum);
+    select=Graphnum;
+    if(Graphnum==1){
+    int graph1[5][5] = {{0,1,1,1,0},
+                       {1,0,1,0,0},
+                       {1,1,0,0,1},
+                       {1,0,0,0,0},
+                       {0,0,1,0,0}};
+    printf("BFS along with every iteration:\n");
+    BFS(graph1,0,5);
+    }
+    else if(Graphnum==2){
+    int graph2[6][6] = {{0,1,0,1,0,0},
+                       {1,0,1,0,1,0},
+                       {0,1,0,0,0,0},
+                       {1,0,0,0,0,0},
+                       {0,1,0,0,0,1},
+                       {0,0,0,0,1,0}};
+    printf("BFS along with every iteration:\n");
+    BFS(graph2,0,6);
+    }
+    else if(Graphnum==0) printf("Exited");
+    }
+    return 0;
+}
+
+
