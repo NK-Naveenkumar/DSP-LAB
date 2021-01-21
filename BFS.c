@@ -90,7 +90,10 @@ int main()
     printf("BFS along with every iteration:\n");
     BFS(graph2,0,6);
     }
-    else if(Graphnum==0) printf("Exited");
+    else if(Graphnum==0){ 
+        printf("Exited");
+        break;
+    }
     }
     return 0;
 }
