@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <stdbool.h>
 #define N 6
-int Graphnum;
-int queue[N],path[N];
-int front = -1,rear=-1;
+int Graphnum; // number of graphs to be solved
+// Queue to implement BFS and Path to store the BFS path
+int queue[N],path[N]; 
+int front = -1,rear=-1; //front and rear to implement queue
+
+// function to insert value in the queue
 void enqueue(int val){
     if(front ==-1 ){
         front = front +1;
@@ -17,17 +20,23 @@ void enqueue(int val){
     //printf("%d",queue[rear]);
     return;
 }
+
+// function to delete value from the queue
 int dequeue(){
     int imd=queue[front];
     front=front+1;
     return imd;
 }
+
+// function to find if the queue is empty
 int isempty(){
     //printf("%d %d",front,rear);
     if(front>rear) return 0;
     else return 1;
     
 }
+
+// function to search if the value is there in the queue or not
 int search_Q(int key){
     int i=front;
     while(i<=rear){
@@ -36,10 +45,14 @@ int search_Q(int key){
     }
     return 1;
 }
+
+// fundtion to search if the value is present in path array
 int search_path(int key){
     for(int i=0;i<5;i++) if(path[i]==key) return 0;
     return 1;
 }
+
+// function to implement Breadth-First-Search
 void BFS(int graph[N][N],int k,int n){
     enqueue(k);
     int curr,m=0;
@@ -60,6 +73,7 @@ void BFS(int graph[N][N],int k,int n){
     }
 }
 
+//main
 int main()
 {   int select =3;
     while(select!=0){
