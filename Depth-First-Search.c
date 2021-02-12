@@ -1,24 +1,32 @@
 #include <stdio.h>
 #include <stdbool.h>
 #define N 6
-int Graphnum;
+int Graphnum; // number of graphs
+// stack to implement DFS and path to store the DFS path
 int stack[N],path[N];
-int top=-1;
+int top=-1;// top to implement stack
+
+// function to push element into the top of stack
 void stackpush(int val){
     top=top+1;
     stack[top]=val;
 }
+
+// function to remove element from top
 int stackpop(){
     int imd=stack[top];
     top = top-1;
     return imd;
 }
+
+// function to check stack is empty or not
 int isempty(){
     //printf("%d",top);
     if(-1==top) return 0;
-    else return 1;
-    
+    else return 1;   
 }
+
+// function to search an element is in the stack or not
 int search_stack(int key){
     int i=0;
     if(top==-1) return 1;
@@ -28,10 +36,14 @@ int search_stack(int key){
     }
     return 1;
 }
+
+// function to search an eelement is the path or not
 int search_path(int key){
     for(int i=0;i<5;i++) if(path[i]==key) return 0;
     return 1;
 }
+
+// function to implement Depth-first-search
 void DFS(int graph[N][N],int k,int n){
     stackpush(k);
     int curr,m=0;
@@ -52,6 +64,7 @@ void DFS(int graph[N][N],int k,int n){
     }
 }
 
+//main
 int main()
 {   int select =3;
     while(select!=0){
