@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
-#define N 6
+#define N 10
 int Graphnum; // number of graphs to be solved
 // Queue to implement BFS and Path to store the BFS path
 int queue[N],path[N]; 
@@ -47,8 +47,8 @@ int search_Q(int key){
 }
 
 // fundtion to search if the value is present in path array
-int search_path(int key){
-    for(int i=0;i<5;i++) if(path[i]==key) return 0;
+int search_path(int key,int n){
+    for(int i=0;i<n;i++) if(path[i]==key) return 0;
     return 1;
 }
 
@@ -63,7 +63,7 @@ void BFS(int graph[N][N],int k,int n){
     path[m] = curr;
     m++;
     for(int i=0;i<n;i++){
-        if(graph[curr][i]==1 && search_Q(i)==1 && search_path(i)==1){
+        if(graph[curr][i]==1 && search_Q(i)==1 && search_path(i,n)==1){
             enqueue(i);
         }
     }
@@ -95,12 +95,21 @@ int main()
     BFS(graph1,0,5);
     }
     else if(Graphnum==2){
-    int graph2[6][6] = {{0,1,0,1,0,0},
+    int graph2[6][6] = {{0,1,0,1,0,0},   
                        {1,0,1,0,1,0},
                        {0,1,0,0,0,0},
                        {1,0,0,0,0,0},
                        {0,1,0,0,0,1},
                        {0,0,0,0,1,0}};
+    /* int graph2[9][9] = {{0,1,0,1,0,0,0,0,1},
+                           {1,0,0,0,0,0,0,1,0},
+                           {0,0,0,1,0,1,0,1,0},
+                           {1,0,1,0,1,0,0,0,0},
+                           {0,0,0,1,0,0,0,0,1},
+                           {0,0,1,0,0,0,1,0,0},
+                           {0,0,0,0,0,1,0,0,0},
+                           {0,1,1,0,0,0,0,0,0},
+                           {1,0,0,0,1,0,0,0,0}}; */
     printf("BFS along with every iteration:\n");
     BFS(graph2,0,6);
     }
