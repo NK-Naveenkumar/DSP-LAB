@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
-#define N 10
+#define N 9
 int Graphnum; // number of graphs to be solved
 // Queue to implement BFS and Path to store the BFS path
 int queue[N],path[N]; 
@@ -31,7 +31,7 @@ int dequeue(){
 // function to find if the queue is empty
 int isempty(){
     //printf("%d %d",front,rear);
-    if(front>rear) return 0;
+    if(front>rear ) return 0;
     else return 1;
     
 }
@@ -47,7 +47,7 @@ int search_Q(int key){
 }
 
 // fundtion to search if the value is present in path array
-int search_path(int key,int n){
+int search_path(int key, int n){
     for(int i=0;i<n;i++) if(path[i]==key) return 0;
     return 1;
 }
@@ -64,11 +64,12 @@ void BFS(int graph[N][N],int k,int n){
     m++;
     for(int i=0;i<n;i++){
         if(graph[curr][i]==1 && search_Q(i)==1 && search_path(i,n)==1){
+            //printf("\n+%d+\n",i);
             enqueue(i);
         }
     }
-    if(Graphnum==1) for(int i=0;i<m;i++) printf("%d ",path[i]);
-    if(Graphnum==2) for(int i=0;i<m;i++) printf("%d ",path[i]+1);
+     for(int i=0;i<m;i++) printf("%d ",path[i]);
+    //if(Graphnum==2) for(int i=0;i<m;i++) printf("%d ",path[i]);
     printf("\n");
     }
 }
@@ -95,13 +96,13 @@ int main()
     BFS(graph1,0,5);
     }
     else if(Graphnum==2){
-    int graph2[6][6] = {{0,1,0,1,0,0},   
+    /*int graph2[6][6] = {{0,1,0,1,0,0},   
                        {1,0,1,0,1,0},
                        {0,1,0,0,0,0},
                        {1,0,0,0,0,0},
                        {0,1,0,0,0,1},
-                       {0,0,0,0,1,0}};
-    /* int graph2[9][9] = {{0,1,0,1,0,0,0,0,1},
+                       {0,0,0,0,1,0}};*/
+    int graph2[9][9] = {   {0,1,0,1,0,0,0,0,1},
                            {1,0,0,0,0,0,0,1,0},
                            {0,0,0,1,0,1,0,1,0},
                            {1,0,1,0,1,0,0,0,0},
@@ -109,9 +110,9 @@ int main()
                            {0,0,1,0,0,0,1,0,0},
                            {0,0,0,0,0,1,0,0,0},
                            {0,1,1,0,0,0,0,0,0},
-                           {1,0,0,0,1,0,0,0,0}}; */
+                           {1,0,0,0,1,0,0,0,0}}; 
     printf("BFS along with every iteration:\n");
-    BFS(graph2,0,6);
+    BFS(graph2,0,9);
     }
     else if(Graphnum==0){ 
         printf("Exited");
